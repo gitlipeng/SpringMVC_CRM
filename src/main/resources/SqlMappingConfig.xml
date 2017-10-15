@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 包的别名 -->
+    <typeAliases>
+        <package name="com.spring.crm.pojo"/>
+    </typeAliases>
+
+    <!-- 将xml和dao接口使用相同的名字，放到同一目录下 -->
+    <mappers>
+        <package name="com.spring.crm.dao"></package>
+    </mappers>
+</configuration>
+
+
