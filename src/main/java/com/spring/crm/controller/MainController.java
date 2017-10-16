@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -27,5 +28,12 @@ public class MainController {
         List<BaseDict> list = baseDictDao.queryBaseDictByDictTypeCode(dictTypeCode);
         System.out.println(list);
         return list;
+    }
+
+    @RequestMapping("/customer")
+    public ModelAndView customer(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("customer");
+        return modelAndView;
     }
 }
