@@ -3,7 +3,13 @@ package com.spring.crm.common;
 import java.util.List;
 
 public class Page<T> {
-    
+	public Page(int total, int page, int size, List<T> rows) {
+		this.total = total;
+		this.page = page;
+		this.size = size;
+		this.rows = rows;
+	}
+
 	private int total;
 	private int page;
 	private int size;

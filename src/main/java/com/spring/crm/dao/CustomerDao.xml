@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.crm.dao.CustomerDao">
+    <sql id="customerQueryVo">
+        <where>
+            <if test="custName != null and custName != ''">
+                AND a.cust_name LIKE '%${custName}%'
+            </if>
+            <if test="custSource != null and custSource != ''">
+                AND a.cust_source = #{custSource}
+            </if>
+            <if test="custIndustry != null and custIndustry != ''">
+                AND a.cust_industry = #{custIndustry}
+            </if>
+            <if test="custLevel != null and custLevel != ''">
+                AND a.cust_level = #{custLevel}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 根据queryVo分页查询数据 -->
+    <select id="queryCustomerByQueryVo" parameterType="com.spring.crm.vo.QueryVo"
+            resultType="Customer">
+        SELECT
+        a.cust_id,
+        a.cust_name,
+        a.cust_user_id,
+        a.cust_create_id,
+        b.dict_item_name cust_source,
+        c.dict_item_name cust_industry,
+        d.dict_item_name cust_level,
+        a.cust_linkman,
+        a.cust_phone,
+        a.cust_mobile,
+        a.cust_zipcode,
+        a.cust_address,
+        a.cust_createtime
+        FROM
+        customer a
+        LEFT JOIN base_dict b ON a.cust_source = b.dict_id
+        LEFT JOIN base_dict c ON a.cust_industry = c.dict_id
+        LEFT JOIN base_dict d ON a.cust_level = d.dict_id
+        <include refid="customerQueryVo" />
+        <if test="start != null">
+            LIMIT #{start}, #{rows}
+        </if>
+    </select>
+
+    <!-- 根据queryVo查询数据条数 -->
+    <select id="queryCountByQueryVo" parameterType="com.spring.crm.vo.QueryVo"
+            resultType="int">
+        SELECT count(1) FROM customer a
+        <include refid="customerQueryVo" />
+    </select>
+</mapper>
