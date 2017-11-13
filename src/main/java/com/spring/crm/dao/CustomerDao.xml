@@ -54,4 +54,54 @@
         SELECT count(1) FROM customer a
         <include refid="customerQueryVo" />
     </select>
+
+    <select id="queryCustomerById" parameterType="long" resultType="Customer">
+        SELECT * FROM customer WHERE cust_id = #{id}
+    </select>
+
+    <select id="updateCustomer" parameterType="Customer">
+
+        UPDATE `customer`
+        SET
+        <if test="cust_name !=null and cust_name != ''">
+            `cust_name` = #{cust_name},
+        </if>
+        <if test="cust_user_id !=null">
+            `cust_user_id` = #{cust_user_id},
+        </if>
+        <if test="cust_create_id !=null">
+            `cust_create_id` = #{cust_create_id},
+        </if>
+        <if test="cust_source !=null and cust_source != ''">
+            `cust_source` = #{cust_source},
+        </if>
+        <if test="cust_industry !=null and cust_industry != ''">
+            `cust_industry` = #{cust_industry},
+        </if>
+        <if test="cust_level !=null and cust_level != ''">
+            `cust_level` = #{cust_level},
+        </if>
+        <if test="cust_linkman !=null and cust_linkman != ''">
+            `cust_linkman` = #{cust_linkman},
+        </if>
+        <if test="cust_phone !=null and cust_phone != ''">
+            `cust_phone` = #{cust_phone},
+        </if>
+        <if test="cust_mobile !=null and cust_mobile != ''">
+            `cust_mobile` = #{cust_mobile},
+        </if>
+        <if test="cust_zipcode !=null and cust_zipcode != ''">
+            `cust_zipcode` = #{cust_zipcode},
+        </if>
+        <if test="cust_address !=null and cust_address != ''">
+            `cust_address` = #{cust_address},
+        </if>
+        `cust_createtime` = NOW()
+        WHERE
+        (`cust_id` = #{cust_id});
+    </select>
+
+    <select id="deleteCustomerById" parameterType="long">
+        DELETE FROM customer WHERE   cust_id = #{id}
+    </select>
 </mapper>

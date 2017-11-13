@@ -12,4 +12,10 @@ public interface CustomerService {
      * @return
      */
     Page<Customer> queryCustomerByQueryVo(QueryVo queryVo);
+
+    Customer queryCustomerById(Long id);
+
+    void updateCustomer(Customer customer);
+
+    void deleteCustomerById(Long id);
 }

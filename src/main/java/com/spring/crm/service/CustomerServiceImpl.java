@@ -28,4 +28,16 @@ public class CustomerServiceImpl implements CustomerService {
 
         return page;
     }
+
+    public Customer queryCustomerById(Long id){
+        return this.customerDao.queryCustomerById(id);
+    }
+
+    public void updateCustomer(Customer customer){
+        this.customerDao.updateCustomer(customer);
+    }
+
+    public void deleteCustomerById(Long id){
+        this.customerDao.deleteCustomerById(id);
+    }
 }

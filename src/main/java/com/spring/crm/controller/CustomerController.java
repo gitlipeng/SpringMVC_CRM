@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -62,9 +64,26 @@ public class CustomerController {
     }
 
 
+    @RequestMapping("/customer/edit")
+    @ResponseBody
+    public Customer queryCustomerList(@RequestParam Long id) {
+        return this.customerService.queryCustomerById(id);
+    }
+    @RequestMapping("/customer/update")
+    @ResponseBody
+    public String updateCustomer(Customer customer){
+        System.out.println("updateCustomer");
+        this.customerService.updateCustomer(customer);
+        return "OK";
+    }
 
-
-
+    @RequestMapping("/customer/delete")
+    @ResponseBody
+    public String deleteCustomerById(Long id){
+        System.out.println("deleteCustomerById");
+        this.customerService.deleteCustomerById(id);
+        return "OK";
+    }
 
     @RequestMapping("/customer")
     public String customer(Model model){
@@ -83,4 +102,5 @@ public class CustomerController {
 
         return "customer";
     }
+
 }

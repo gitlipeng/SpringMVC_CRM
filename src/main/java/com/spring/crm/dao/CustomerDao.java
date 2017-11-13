@@ -25,4 +25,10 @@ public interface CustomerDao {
      */
     int queryCountByQueryVo(QueryVo queryVo);
 
+    Customer queryCustomerById(Long id);
+
+    void updateCustomer(Customer customer);
+
+    void deleteCustomerById(Long id);
+
 }
